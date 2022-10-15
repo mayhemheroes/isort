@@ -2,7 +2,8 @@
 import atheris
 import sys
 import io
-import tempfile
+import isort
+import isort.exceptions
 
 
 class SplitAwareFuzzedDataProvider(atheris.FuzzedDataProvider):
@@ -17,18 +18,14 @@ class SplitAwareFuzzedDataProvider(atheris.FuzzedDataProvider):
         return self.ConsumeString(self._chunk_size)
 
 
-with atheris.instrument_imports():
-    import isort
-    import isort.exceptions
-
-split_count = 2
+split_count = 4
 
 
+@atheris.instrument_func
 def TestOneInput(data):
     fdp = SplitAwareFuzzedDataProvider(data, split_count)
 
     try:
-
         isort.code(fdp.ConsumeStringSegment())
 
         text_io = io.StringIO(fdp.ConsumeStringSegment())
@@ -37,8 +34,6 @@ def TestOneInput(data):
         isort.check_code(fdp.ConsumeStringSegment(), True)
 
         isort.find_imports_in_code(fdp.ConsumeStringSegment())
-
-
     except isort.exceptions.ISortError:
         pass
 
