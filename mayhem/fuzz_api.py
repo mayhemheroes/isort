@@ -29,12 +29,12 @@ def TestOneInput(data):
     try:
         isort.code(fdp.ConsumeStringSegment())
 
-        text_io = io.StringIO(fdp.ConsumeStringSegment())
-        isort.check_stream(text_io, True)
-
-        isort.check_code(fdp.ConsumeStringSegment(), True)
-
-        isort.find_imports_in_code(fdp.ConsumeStringSegment())
+        # text_io = io.StringIO(fdp.ConsumeStringSegment())
+        # isort.check_stream(text_io, True)
+        #
+        # isort.check_code(fdp.ConsumeStringSegment(), True)
+        #
+        # isort.find_imports_in_code(fdp.ConsumeStringSegment())
     except isort.exceptions.ISortError:
         pass
 
