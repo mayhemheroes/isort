@@ -2,8 +2,9 @@
 import atheris
 import sys
 import io
-import isort
-import isort.exceptions
+
+with atheris.instrument_imports(exclude=["subprocess", "urllib", "urllib.parse"]):
+    import isort
 
 
 class SplitAwareFuzzedDataProvider(atheris.FuzzedDataProvider):
