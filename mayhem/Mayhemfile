@@ -1,0 +1,8 @@
+project: isort
+target: api-fuzz
+testsuite:
+    - file://mayhem/testsuite
+
+cmds:
+  - cmd: /src/mayhem/fuzz_api.py
+    libfuzzer: true
