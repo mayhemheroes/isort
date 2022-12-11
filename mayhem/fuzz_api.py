@@ -3,16 +3,16 @@ import atheris
 import sys
 import io
 
-with atheris.instrument_imports():
-    import isort
-
+import isort
+import isort.api
+import isort.exceptions
 
 
 @atheris.instrument_func
 def TestOneInput(data):
-
     try:
-        isort.code(str(data))
+        fdp = atheris.FuzzedDataProvider(data)
+        isort.code(fdp.ConsumeUnicodeNoSurrogates(fdp.remaining_bytes()))
 
     except isort.exceptions.ISortError:
         pass
