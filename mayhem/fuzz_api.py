@@ -14,7 +14,7 @@ def TestOneInput(data):
         fdp = atheris.FuzzedDataProvider(data)
         code = fdp.ConsumeUnicode(fdp.remaining_bytes())
         if fdp.ConsumeBool():
-            isort.find_imports_in_code(code)
+            isort.check_code(code)
         else:
             isort.code(code)
     except isort.exceptions.ISortError:
