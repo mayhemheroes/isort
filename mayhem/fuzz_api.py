@@ -1,19 +1,18 @@
-#! /usr/bin/python3
+#! /usr/bin/env python3
 import atheris
 import sys
 import io
 
-import isort
-import isort.api
-import isort.exceptions
+with atheris.instrument_imports(include=['isort']):
+    import isort
+    import isort.api
+    import isort.exceptions
 
 
-@atheris.instrument_func
 def TestOneInput(data):
     try:
         fdp = atheris.FuzzedDataProvider(data)
-        isort.code(fdp.ConsumeUnicodeNoSurrogates(fdp.remaining_bytes()))
-
+        isort.code(fdp.ConsumeUnicode(fdp.remaining_bytes()))
     except isort.exceptions.ISortError:
         pass
 
