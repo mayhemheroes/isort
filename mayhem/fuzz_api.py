@@ -12,6 +12,7 @@ with atheris.instrument_imports(include=['isort']):
 def TestOneInput(data):
     try:
         fdp = atheris.FuzzedDataProvider(data)
+        isort.find_imports_in_code(fdp.ConsumeUnicode(fdp.ConsumeIntInRange(1, 1000)))
         isort.code(fdp.ConsumeUnicode(fdp.remaining_bytes()))
     except isort.exceptions.ISortError:
         pass
