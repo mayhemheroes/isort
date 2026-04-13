@@ -1,10 +1,10 @@
-# Build Stage
-FROM fuzzers/atheris:2.0.7-python3.9
+FROM python:3.12-bullseye
 
-# Install dependencies
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y clang
+RUN pip3 install atheris
 
 ADD . /src
 WORKDIR /src
-RUN python3 -m pip install .
+RUN SETUPTOOLS_SCM_PRETEND_VERSION=5.10.1 python3 -m pip install .
 
 CMD ["/src/mayhem/fuzz_api.py"]
