@@ -1,0 +1,8 @@
+project: isort
+target: api-fuzz
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/api-fuzz/testsuite
+cmds:
+  - cmd: /mayhem/isort-fuzz
+    libfuzzer: true
